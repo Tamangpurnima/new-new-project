@@ -10,4 +10,14 @@ class CourseDetail extends Model
     use HasFactory;
     protected $table="course_detail";
     protected $fillable=['id', 'description', 'course_id', 'college_id'];
+
+    public function college()
+    {
+        return $this->belongsTo(College::class, 'college_id');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
 }

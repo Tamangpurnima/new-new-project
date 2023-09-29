@@ -52,24 +52,21 @@
 					</div>
 				</div>
 
-				@foreach($college as $college)
 				<div class="col-lg-4 course_box">
 					<div class="card">
 						<img class="card-img-top" src="images/college_logo">
 						<div class="card-body text-center">
-							<div class="card-title"><a href="courses.html">{{$college->name}}</a></div>
-							<div class="card-text">{{$college->address}}</div>
+							<div class="card-title"><a href="courses.html">College Name</a></div>
+							<div class="card-text">Address</div>
 						</div>
 						<br/>
 						<div class="d-flex justify-content-center">
-							<a href="/college/detail/{{$college->id}}">
-								<button class="btn btn-primary">View</button>
-							</a>
+							<button class="btn btn-primary">View</button>
 						</div>
 						<br/>
 					</div>
 				</div>
-				@endforeach
+
 
 			</div>
 		</div>		

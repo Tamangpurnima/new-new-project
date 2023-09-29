@@ -69,10 +69,36 @@ public function store(Request $request)
 
     return redirect()->route('home')->with('success', 'College registered successfully!');
 }
-public function show(College $college)
+     function show(College $college)
     {
         $college=College::all();
         return view('admin.collegeshow',['college'=>$college]);
     }
+     function showForStudent(College $college)
+    {
+        $college=College::all();
+        return view('home.college',['college'=>$college]);
+    }
+    public function getById($id)
+    {
+        $college= College::find($id);
+        return view('college.viewcollegedes', compact('college'));
+    }
+    // public function getByIdForAdmin($id)
+    // {
+    //     $college = College::find($id);
+    //     return view('admin.collegeDetailView', compact('college'));
+    // }
+    public function getByIdForAdmin($id)
+    {
+        $college = College::with('courseDetails.course')->find($id);
+        return view('admin.collegeDetailView', compact('college'));
+    }
+    public function getByIdForStudent($id)
+    {
+        $college = College::with('courseDetails.course')->find($id);
+        return view('home.collegeDetailView', compact('college'));
+    }
+
 
 }

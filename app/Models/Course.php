@@ -21,4 +21,9 @@ class Course extends Model
         'gpa_limit',
         'duration',
     ];
+
+    public function courseDetails()
+    {
+        return $this->hasMany(CourseDetail::class, 'course_id');
+    }
 }

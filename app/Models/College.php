@@ -25,4 +25,9 @@ class College extends Model
         return $this->hasMany(CollegeImage::class);
     }
 
+    public function courseDetails()
+    {
+        return $this->hasMany(CourseDetail::class, 'college_id');
+    }
+
 }

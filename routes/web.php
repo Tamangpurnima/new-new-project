@@ -39,9 +39,11 @@ Route::get('/', function () {
 Route::get('/recommend', function () {
     return view('home.recommend');
 });
-Route::get('/college', function () {
-    return view('home.college');
-});
+// Route::get('/college', function () {
+//     return view('home.college');
+// });
+Route::get('/college', [CollegeController::class, 'showForStudent'])->name('college.showForStudent');
+
 Route::get('/aboutus', function () {
     return view('home.aboutus');
 });
@@ -63,9 +65,11 @@ Route::get('/view/course-detail', function () {
 Route::get('/inquiry', function () {
     return view('home.inquiry');
 });
-Route::get('/college/detail', function () {
-    return view('home.collegeDetail');
-});
+// Route::get('/college/detail', function () {
+//     return view('home.collegeDetail');
+// });
+Route::get('/college/detail/{id}', [CollegeController::class, 'getByIdForStudent'])->name('college.getByIdForStudent');
+
 
 Route::get('/view/colleges', function () {
     return view('home.viewCourse');
@@ -111,6 +115,7 @@ Route::get('/college/show', [CollegeController::class, 'show'])->name('college.s
 // Route::get('/college', function(){
 //     return view('home.collegeSignUP');
 // });
+Route::get('/college/course/view/{id}', [CollegeController::class, 'getById'])->name('college.getById');
 
 Route::get('/collegesignupshow', function(){
     return view('home.collegeSignUP');
@@ -134,9 +139,9 @@ Route::post('/coursedetail/update/{id}', [CourseDetailController::class, 'update
 Route::get('/dashboard', function(){
     return view('admin.dashboard');
 });
-Route::get('/admin/college/show', function(){
-    return view('admin.collegeshow');
-});
+// Route::get('/admin/college/show', function(){
+//     return view('admin.collegeshow');
+// });
 Route::get('/admin/student/show', function(){
     return view('admin.studentshow');
 });
@@ -155,6 +160,10 @@ Route::get('/admin/college/show', [CollegeController::class, 'show'])->name('col
 Route::get('/admin/student/show', [StudentController::class, 'show'])->name('students.show');
 Route::get('/admin/course/show', [CourseController::class, 'show'])->name('course.show');
 Route::get('/admin/course/view/{id}', [CourseController::class, 'getById'])->name('course.getById');
+
+Route::get('/admin/student/detail/{id}', [StudentController::class, 'getByIdForAdmin'])->name('students.getByIdForAdmin');
+Route::get('/admin/college/detail/{id}', [CollegeController::class, 'getByIdForAdmin'])->name('college.getByIdForAdmin');
+
 
 
 
@@ -191,11 +200,15 @@ Route::get('/inquiry', function(){
 Route::get('/college/inquiry/givedate', function(){
     return view('college.inquirygivedate');
 });
+
+
 // Route::get('/admin/course/view', function(){
 //     return view('admin.viewcourse');
 // });
 
-
+Route::get('/college/course/view', function(){
+    return view('college.viewcollegedes');
+});
 
 
 

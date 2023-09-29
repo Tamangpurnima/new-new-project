@@ -9,6 +9,7 @@
     <div class="container">
     <table class="table table-bordered shadow text-center table-stripped">
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Address</th>
@@ -17,12 +18,14 @@
                 <th>Description</th>
                 <th>Logo</th>
                 <th>Gallery</th>
+                <th>View</th>
                 <th>Delete</th>
                 <th>Edit</th>
 
             </tr>
             @foreach($college as $college)
             <tr>
+                <td>{{$college->id}}</td>
                 <td>{{$college->name}}</td>
                 <td>{{$college->email}}</td>
                 <td>{{$college->address}}</td>
@@ -31,6 +34,7 @@
                 <td>{{$college->description}}</td>
                 <td>{{$college->logo}}</td>
                 <td>{{$college->gallery}}</td>
+                <td><a href="/admin/college/detail/{{$college->id}}" class="btn btn-primary">View</a></td>
                 <td><a href="/college/delete/{{$college->id}}" class="btn btn-danger">DELETE</a></td>
                 <td><a href="/college/edit/{{$college->id}}" class="btn btn-success">EDIT</a></td>
 

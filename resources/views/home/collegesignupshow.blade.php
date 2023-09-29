@@ -32,6 +32,7 @@
                 <td>{{$college->description}}</td>
                 <td>{{$college->logo}}</td>
                 <td>{{$college->gallery}}</td>
+                <td><a href="/admin/college/detail/{{$college->id}}" class="btn btn-primary">View</a></td>
                 <td><a href="/college/delete/{{$college->id}}" class="btn btn-danger">DELETE</a></td>
                 <td><a href="/college/edit/{{$college->id}}" class="btn btn-success">EDIT</a></td>
 

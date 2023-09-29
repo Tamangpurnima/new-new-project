@@ -107,10 +107,11 @@ class StudentController extends Controller
         $student=Students::all();
         return view('admin.studentshow',['student'=>$student]);
     }
-
-
-
-
+    public function getByIdForAdmin($id)
+    {
+        $student = Students::find($id);
+        return view('admin.studentDetailView', compact('student'));
+    }
 
 }
 
