@@ -9,6 +9,7 @@ use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\CourseDetailController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\InquiryController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -64,7 +65,17 @@ Route::get('/view/course-detail', function () {
 });
 Route::get('/inquiry', function () {
     return view('home.inquiry');
-});
+})->name('inquiry.home');
+
+Route::get('/inquiry/create', [InquiryController::class, 'create'])->name('inquiry.create');
+Route::post('/inquiry/store', [InquiryController::class, 'store'])->name('inquiry.store');
+Route::get('/inquiry/show', [InquiryController::class, 'show'])->name('inquiry.show');
+Route::get('/inquiry/edit/{id}', [InquiryController::class, 'edit'])->name('inquiry.edit');
+Route::put('/inquiry/update/{id}', [InquiryController::class, 'update'])->name('inquiry.update');
+Route::get('/inquiry/delete/{id}', [InquiryController::class, 'destroy'])->name('inquiry.destroy');
+
+
+
 // Route::get('/college/detail', function () {
 //     return view('home.collegeDetail');
 // });
@@ -81,8 +92,7 @@ Route::get('/courses', function () {
 
 Route::get('/courses', [CourseController::class, 'showForStudent'])->name('course.showForStudent');
 Route::get('/view/course/description/{id}', [CourseController::class, 'getByIdforStudent'])->name('course.getByIdforStudent');
-
-
+Route::get('/college/detail/course/description/{id}', [CourseDetailController::class, 'getById'])->name('coursedetail.getById');
 
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBackHistory']], function(){
         Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
@@ -133,6 +143,7 @@ Route::get('/coursedetail/show', [CourseDetailController::class, 'show'])->name(
 Route::get('/coursedetail/delete/{id}', [CourseDetailController::class, 'destroy'])->name('coursedetail.destroy');
 Route::get('/coursedetail/edit/{id}',[CourseDetailController::class,'edit']);
 Route::post('/coursedetail/update/{id}', [CourseDetailController::class, 'update'])->name('coursedetail.update');
+
 
 
 //routing for admin
@@ -193,9 +204,9 @@ Route::get('/college/logout', function(){
     return view('college.logout');
 });
 
-Route::get('/inquiry', function(){
-    return view('home.inquiry');
-});
+// Route::get('/inquiry', function(){
+//     return view('home.inquiry');
+// });
 
 Route::get('/college/inquiry/givedate', function(){
     return view('college.inquirygivedate');

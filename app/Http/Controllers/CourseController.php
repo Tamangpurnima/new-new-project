@@ -91,4 +91,5 @@ class CourseController extends Controller
         $course = Course::find($id);
         return view('home.viewcoursedes', compact('course'));
     }
+    
 }

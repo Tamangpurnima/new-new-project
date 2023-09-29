@@ -95,7 +95,7 @@
                                 </div>
                                 <br/>
                                 <div class="d-flex justify-content-center">
-                                    <a href="/view/course/description/{{$courseDetail->course->id}}">
+                                    <a href="/college/detail/course/description/{{$courseDetail->id}}">
                                         <button class="btn btn-primary">View</button>
                                     </a>
                                 </div>

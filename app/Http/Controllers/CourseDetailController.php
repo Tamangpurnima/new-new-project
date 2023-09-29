@@ -122,4 +122,11 @@ use Illuminate\Http\Request;
         $courseDetail->delete();
         return redirect('coursedetail/show');
     }
+    public function getById($id)
+    {
+        $courseDetail = CourseDetail::find($id);
+        return view('home.viewdes', compact('courseDetail'));
+    }
+    
+
 }
