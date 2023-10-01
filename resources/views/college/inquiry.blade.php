@@ -17,6 +17,17 @@
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
+            @foreach($inquiry as $inquiry)
+            <tr>
+                <td>{{$inquiry->id}}</td>
+                <td>{{$inquiry->student_id}}</td>
+                <td>{{$inquiry->collegedetail_id}}</td>
+                <td>{{$inquiry->inquirydate}}</td>
+                <td><a href="/inquiry/delete/{{$inquiry->id}}" class="btn btn-danger">DELETE</a></td>
+                <td><a href="/college/inquiry/edit/{{$inquiry->id}}" class="btn btn-success">EDIT</a></td>
+
+            </tr>
+            @endforeach
             <tr>
                 <td> <a href="/college/inquiry/givedate"><button type="button" class="btn btn-success">Give Date</button></a></td>
             </tr>

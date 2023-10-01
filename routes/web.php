@@ -10,6 +10,8 @@ use App\Http\Controllers\CourseDetailController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\CollegeDashboardController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -66,6 +68,7 @@ Route::get('/view/course-detail', function () {
 Route::get('/inquiry', function () {
     return view('home.inquiry');
 })->name('inquiry.home');
+
 
 Route::get('/inquiry/create', [InquiryController::class, 'create'])->name('inquiry.create');
 Route::post('/inquiry/store', [InquiryController::class, 'store'])->name('inquiry.store');
@@ -147,9 +150,11 @@ Route::post('/coursedetail/update/{id}', [CourseDetailController::class, 'update
 
 
 //routing for admin
-Route::get('/dashboard', function(){
-    return view('admin.dashboard');
-});
+// Route::get('/dash', function(){
+//     return view('admin.dashboard');
+// });
+Route::get('/dash', [AdminDashboardController::class, 'count'])->name('adminController.count');
+
 // Route::get('/admin/college/show', function(){
 //     return view('admin.collegeshow');
 // });
@@ -159,9 +164,13 @@ Route::get('/admin/student/show', function(){
 Route::get('/admin/course/show', function(){
     return view('admin.courseshow');
 });
-Route::get('/admin/inquiry/show', function(){
-    return view('admin.inquiryshow');
-});
+// Route::get('/admin/inquiry/show', function(){
+//     return view('admin.inquiryshow');
+// });
+Route::get('/admin/inquiry/show', [InquiryController::class, 'showForAdmin'])->name('inquiry.showForAdmin');
+Route::get('/admin/inquiry/edit/{id}', [InquiryController::class, 'editForAdmin'])->name('admin.inquiryedit');
+
+
 Route::get('/admin/edit-profile', function(){
     return view('admin.editProfile');
 });
@@ -189,15 +198,16 @@ Route::get('/contact/delete/{id}', [ContactController::class, 'destroy'])->name(
 
 
 //routing for college admin
-Route::get('/college/dashboard', function(){
-    return view('college.dashboard');
-});
+Route::get('/college/dashboard', [CollegeDashboardController::class, 'count'])->name('cdashboard.count');
+
 Route::get('/college/edit-profile', function(){
     return view('college.edit');
 });
-Route::get('/college/view-inquiry', function(){
-    return view('college.inquiry');
-});
+// Route::get('/college/view-inquiry', function(){
+//     return view('college.inquiry');
+// });
+Route::get('/college/view-inquiry', [InquiryController::class, 'showForCollege'])->name('college.inquiryshow');
+Route::get('/college/inquiry/edit/{id}', [InquiryController::class, 'editForCollege'])->name('college.inquiryedit');
 Route::get('/college/course-detail', [CourseDetailController::class, 'showForCollege'])->name('coursedetail.show');
 
 Route::get('/college/logout', function(){

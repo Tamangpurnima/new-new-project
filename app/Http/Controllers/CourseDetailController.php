@@ -94,17 +94,10 @@ use Illuminate\Http\Request;
 
     public function update(Request $request, $id)
 {
-    // Validate and update the course details here
-    // Example:
+    
     $courseDetail = CourseDetail::find($id);
-
-    // Update the fields based on your form input
     $courseDetail->description = $request->input('description');
-
-    // Save the updated course detail
     $courseDetail->save();
-
-    // Redirect to a success page or back to the edit page with a success message
 
    return redirect()->route('coursedetail.show');
 }

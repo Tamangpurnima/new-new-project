@@ -113,6 +113,72 @@ class StudentController extends Controller
         return view('admin.studentDetailView', compact('student'));
     }
 
+    // public function update(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required|email',
+    //         'contact' => 'required',
+    //         'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    //         'passedYear' => 'required',
+    //         'previouscollege' => 'required',
+    //         'gpa' => 'required',
+    //         'interests' => 'required',
+    //         'goals' => 'required',
+    //     ]);
+
+    //     $student = Students::find($id);
+        
+    //     if (!$student) {
+    //         return redirect()->route('students.index')->with('error', 'Student not found');
+    //     }
+
+    //     $student->name = $request->input('name');
+    //     $student->email = $request->input('email');
+    //     $student->contact = $request->input('contact');
+    //     $student->passedyear = $request->input('passedYear');
+    //     $student->previousschool = $request->input('previouscollege');
+    //     $student->gpa = $request->input('gpa');
+    //     $student->interest = $request->input('interests');
+    //     $student->goal = $request->input('goals');
+
+    //     if ($request->hasFile('image')) {
+    //         // Delete the old image if it exists
+    //         if ($student->image) {
+    //             // Delete the old image file from storage
+    //             $oldImagePath = public_path('uploads/' . $student->image);
+    //             if (file_exists($oldImagePath)) {
+    //                 unlink($oldImagePath);
+    //             }
+    //         }
+
+    //         // Upload and save the new image
+    //         $image = $request->file('image');
+    //         $imageName = time() . '.' . $image->getClientOriginalExtension();
+    //         $image->move(public_path('uploads'), $imageName);
+    //         $student->image = $imageName;
+    //     }
+
+    //     $student->save();
+
+    //     return redirect()->route('students.index')->with('success', 'Student updated successfully');
+    // }
+
+    public function activateStudent($id)
+    {
+        $student = Students::find($id);
+        
+        if (!$student) {
+            return redirect()->route('students.index')->with('error', 'Student not found');
+        }
+
+        // Set the status to "active"
+        $student->status = 'active';
+        $student->save();
+
+        return redirect()->route('students.index')->with('success', 'Student status set to active');
+    }
+
 }
 
 

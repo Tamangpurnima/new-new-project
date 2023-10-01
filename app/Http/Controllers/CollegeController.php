@@ -100,5 +100,50 @@ public function store(Request $request)
         return view('home.collegeDetailView', compact('college'));
     }
 
+    public function update(Request $request, College $college)
+{
+    $data = $request->validate([
+        'name' => 'required|string',
+        'email' => 'required|email|unique:colleges,email,' . $college->id,
+        'phone' => 'required|string',
+        'password' => 'required|string',
+        'contact' => 'required|string',
+        'description' => 'required|string',
+        'logo' => 'image|mimes:jpeg,png,jpg,gif',
+        'gallery.*' => 'image|mimes:jpeg,png,jpg,gif',
+    ]);
+
+    // Handle Logo Upload
+    if ($request->hasFile('logo')) {
+        // Delete the old logo file if it exists
+        if ($college->logo) {
+            Storage::disk('public')->delete($college->logo);
+        }
+
+        $logoPath = $request->file('logo')->store('logos', 'public');
+        $data['logo'] = $logoPath;
+    }
+
+    // Update College
+    $college->update($data);
+
+    // Handle Gallery Image Uploads
+    if ($request->hasFile('gallery')) {
+        foreach ($request->file('gallery') as $image) {
+            $imagePath = $image->store('gallery', 'public');
+            $college->images()->create(['path' => $imagePath]);
+        }
+    }
+
+    return redirect()->route('home')->with('success', 'College updated successfully!');
+}
+
+    public function activateCollege(College $college)
+    {
+        // Update the status to "active"
+        $college->update(['status' => 'active']);
+
+        return redirect()->route('home')->with('success', 'College status updated to active!');
+    }
 
 }

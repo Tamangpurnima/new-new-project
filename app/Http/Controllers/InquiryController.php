@@ -62,7 +62,19 @@ class InquiryController extends Controller
             return view('home.inquiryshow',['inquiry'=>$inquiry]);
         }
     
-
+    public function showForAdmin(Inquiry $inquiry)
+        {
+       
+            $inquiry=Inquiry::all();
+            return view('admin.inquiryshow',['inquiry'=>$inquiry]);
+        }
+       
+    public function showForCollege(Inquiry $inquiry)
+        {
+            $inquiry=Inquiry::all();
+            return view('college.inquiry',['inquiry'=>$inquiry]);
+        }
+       
     /**
      * Show the form for editing the specified resource.
      *
@@ -73,6 +85,16 @@ class InquiryController extends Controller
     {
         $inquiry=Inquiry::find($id);
         return view('home.inquiryedit', ['inquiry'=>$inquiry]);
+    }
+    public function editForCollege($id)
+    {
+        $inquiry=Inquiry::find($id);
+        return view('college.inquiryedit', ['inquiry'=>$inquiry]);
+    }
+    public function editForAdmin($id)
+    {
+        $inquiry=Inquiry::find($id);
+        return view('admin.inquiryedit', ['inquiry'=>$inquiry]);
     }
 
     /**
